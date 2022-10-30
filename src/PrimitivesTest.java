@@ -57,8 +57,9 @@ class PrimitivesTest {
 	@Test
 	void setBitValueTest() {
 		long number = 0x3ab7f5; //0011 1010 1011 0111 11_1_1 0101
+		long number2 = 0x3ab7d5;
 		assertEquals(0x3ab7d5, BitOperations.setBitValue(number, 5, false));
-		assertEquals(0x3ab7f5, BitOperations.setBitValue(number, 5, true));
+		assertEquals(0x3ab7f5, BitOperations.setBitValue(number2, 5, true));
 	}
 	
 	@Test

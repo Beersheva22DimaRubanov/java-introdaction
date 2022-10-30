@@ -39,11 +39,10 @@ public class BitOperations {
 	static public long setBitValue(long number, int nBit, boolean value) {
 		long res = -1;
 		if (checkNbit(nBit)) {
-			long mask = 0 << nBit;
+			long mask = 1 << nBit;
 			if (value) {
-				res = number & ~mask;
+				res = number | mask;
 			} else {
-				mask = 1 << nBit;
 				res = number & ~mask;
 			}
 		}
