@@ -1,3 +1,4 @@
+import java.util.PrimitiveIterator.OfLong;
 
 /**
  * right nBit value [0, 63] all methods will return -1 in the case of wrong nBit
@@ -15,14 +16,18 @@ public class BitOperations {
 	static public int getBitValue(long number, int nBit) {
 		int res = -1;
 		if (checkNbit(nBit)) {
-			long mask = 1 << nBit;
-			if ((number & mask) == 0) {
+			if ((number & getMask(nBit)) == 0) {
 				res = 0;
 			} else {
 				res = 1;
 			}
 		}
 		return res;
+	}
+	
+	static private long getMask(int nBit) {
+		long mask = (long) 1 << nBit; 
+		return mask;
 	}
 
 	static private boolean checkNbit(int nBit) {
@@ -39,7 +44,7 @@ public class BitOperations {
 	static public long setBitValue(long number, int nBit, boolean value) {
 		long res = -1;
 		if (checkNbit(nBit)) {
-			long mask = 1 << nBit;
+			long mask = getMask(nBit);
 			if (value) {
 				res = number | mask;
 			} else {
@@ -59,7 +64,7 @@ public class BitOperations {
 	static public long revertBitValue(long number, int nBit) {
 		long res = -1;
 		if (checkNbit(nBit)) {
-			long mask = 1 << nBit;
+			long mask = getMask(nBit);
 			if (BitOperations.getBitValue(number, nBit) == 1) {
 				res = number & ~mask;
 			} else if(BitOperations.getBitValue(number, nBit) == 0) {
