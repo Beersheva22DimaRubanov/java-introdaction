@@ -26,7 +26,7 @@ public class BitOperations {
 	}
 	
 	static private long getMask(int nBit) {
-		long mask = (long) 1 << nBit; 
+		long mask =  (long) 1 << nBit; 
 		return mask;
 	}
 
@@ -67,9 +67,8 @@ public class BitOperations {
 			long mask = getMask(nBit);
 			if (BitOperations.getBitValue(number, nBit) == 1) {
 				res = number & ~mask;
-			} else if(BitOperations.getBitValue(number, nBit) == 0) {
-				mask = 0 << nBit;
-				res = number & ~mask;
+			} else                                                                                                              {
+				res = number | mask;
 			}
 		}
 		return res;

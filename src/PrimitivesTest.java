@@ -66,7 +66,7 @@ class PrimitivesTest {
 	void revertBitValueTest() {
 		long number = 0x3ab7f5; //0011 1010 1011 0111 11_1_1 0101
 		assertEquals(0x3ab7d5, BitOperations.revertBitValue(number, 5));
-		assertEquals(0x3ab7f4, BitOperations.revertBitValue(number, 0));
+		assertEquals(0x3AB7F7, BitOperations.revertBitValue(number, 1));
 	}
 	
 	@Test
@@ -74,6 +74,8 @@ class PrimitivesTest {
 		long number = -1;
 		assertEquals(1, BitOperations.getBitValue(number, 63));
 		number = BitOperations.revertBitValue(number, 63);
+		System.out.println(number);
 		assertEquals(0, BitOperations.getBitValue(number, 63));
+		assertEquals(-1, BitOperations.revertBitValue(number, 63));
 	}
 }
