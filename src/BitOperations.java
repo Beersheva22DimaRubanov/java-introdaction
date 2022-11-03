@@ -7,6 +7,7 @@ import java.util.PrimitiveIterator.OfLong;
  *
  */
 public class BitOperations {
+	private static final int N_BITS = 64;
 	/**
 	 * 
 	 * @param number - any number
@@ -16,22 +17,18 @@ public class BitOperations {
 	static public int getBitValue(long number, int nBit) {
 		int res = -1;
 		if (checkNbit(nBit)) {
-			if ((number & getMask(nBit)) == 0) {
-				res = 0;
-			} else {
-				res = 1;
-			}
+			long mask =BitOperations.getMask(nBit);
+			res = (number & mask) == 0 ? 0 : 1;
 		}
 		return res;
 	}
 	
 	static private long getMask(int nBit) {
-		long mask =  (long) 1 << nBit; 
-		return mask;
+		return (long) 1 << nBit;
 	}
 
 	static private boolean checkNbit(int nBit) {
-		return nBit < 64 && nBit >= 0;
+		return nBit < N_BITS && nBit >= 0;
 	}
 
 	/**
@@ -45,11 +42,12 @@ public class BitOperations {
 		long res = -1;
 		if (checkNbit(nBit)) {
 			long mask = getMask(nBit);
-			if (value) {
-				res = number | mask;
-			} else {
-				res = number & ~mask;
-			}
+			res = value ? number | mask : number & ~mask;
+//			if (value) {
+//				res = number | mask;
+//			} else {
+//				res = number & ~mask;
+//			}
 		}
 		return res;
 	}
@@ -61,14 +59,35 @@ public class BitOperations {
 	 * @return new number in which nBit'h will be reverted (old value - 1, new value
 	 *         - 0)
 	 */
-	static public long revertBitValue(long number, int nBit) {
+	static public long invertBitValue(long number, int nBit) {
 		long res = -1;
 		if (checkNbit(nBit)) {
 			long mask = getMask(nBit);
-			if (BitOperations.getBitValue(number, nBit) == 1) {
-				res = number & ~mask;
-			} else                                                                                                              {
-				res = number | mask;
+			res = number ^ mask;
+//			if (BitOperations.getBitValue(number, nBit) == 1) {
+//				res = number & ~mask;
+//			} else                                                                                                              {
+//				res = number | mask;
+//			}
+		}
+		return res;
+	}
+	
+	static public int leadingZeros(long number) {
+		int res = 0;
+		int nBit = N_BITS - 1;
+		while(nBit >= 0 && getBitValue(number, nBit) == 0) {
+			nBit--;
+			res++;
+		}
+		return res;
+	}
+	
+	static public int oneInNumber(long number) {
+		int res = 0;
+		for(int i =0; i<N_BITS; i++) {
+			if(getBitValue(number, i) == 1) {
+				res++;
 			}
 		}
 		return res;
