@@ -81,16 +81,19 @@ class PrimitivesTest {
 	
 	@Test
 	void digitsNumberTest() {
-		
+		long number = 1;
+		assertEquals(1, Numbers.getNdigits(number));
 	}
 	
 	@Test
 	void leadingZeroTest() {
-		
+		long number = 0x3ab7f5;
+		assertEquals(42, BitOperations.leadingZeros(number));
 	}
 	
 	@Test
 	void isHappyNumberTest() {
-		
+		int number = 203320;
+		assertTrue(Numbers.isHappyNumber(number));
 	}
 }
