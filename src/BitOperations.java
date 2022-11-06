@@ -8,6 +8,7 @@ import java.util.PrimitiveIterator.OfLong;
  */
 public class BitOperations {
 	private static final int N_BITS = 64;
+
 	/**
 	 * 
 	 * @param number - any number
@@ -17,12 +18,12 @@ public class BitOperations {
 	static public int getBitValue(long number, int nBit) {
 		int res = -1;
 		if (checkNbit(nBit)) {
-			long mask =BitOperations.getMask(nBit);
+			long mask = BitOperations.getMask(nBit);
 			res = (number & mask) == 0 ? 0 : 1;
 		}
 		return res;
 	}
-	
+
 	static private long getMask(int nBit) {
 		return (long) 1 << nBit;
 	}
@@ -72,21 +73,21 @@ public class BitOperations {
 		}
 		return res;
 	}
-	
+
 	static public int leadingZeros(long number) {
 		int res = 0;
 		int nBit = N_BITS - 1;
-		while(nBit >= 0 && getBitValue(number, nBit) == 0) {
+		while (nBit >= 0 && getBitValue(number, nBit) == 0) {
 			nBit--;
 			res++;
 		}
 		return res;
 	}
-	
+
 	static public int oneInNumber(long number) {
 		int res = 0;
-		for(int i =0; i<N_BITS; i++) {
-			if(getBitValue(number, i) == 1) {
+		for (int i = 0; i < N_BITS; i++) {
+			if (getBitValue(number, i) == 1) {
 				res++;
 			}
 		}
