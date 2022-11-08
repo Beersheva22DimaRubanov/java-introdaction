@@ -117,5 +117,31 @@ class PrimitivesTest {
 		int expectedNumber = 1234;
 		assertEquals(expectedNumber, Numbers.getNumberFromDigits(new int[] { 1, 2, 3, 4 }));
 	}
+
+	@Test
+	void verifyIdTest() {
+		assertTrue(IsraelIdentity.verifyId(IsraelIdentity.generateRandomId()));
+		assertTrue(IsraelIdentity.verifyId(123456782));
+	}
+
+	@Test
+	void arraysAddsNumberTest() {
+		int unmodifiedArray[] = { 1, 2, 3, 4};
+		int expected[] = { 1, 2, 3, 4, 5 };
+		assertArrayEquals(expected, MyArrays.addsNumber(unmodifiedArray, 5));
+	}
 	
+	@Test
+	void arraysRemoveNumberTest() {
+		int unmodifiedArray[] = { 1, 2, 3, 4, 5};
+		int expected[] = { 1, 2, 3, 4 };
+		assertArrayEquals(expected, MyArrays.removeNumber(unmodifiedArray, 4));
+	}
+	
+	@Test
+	void arraysinsertSortedTest() {
+		int unmodifiedArray[] = { 1, 2, 3, 4, 5, 6, 7, 10};
+		int expected[] = { 0, 1, 2, 3, 4, 5, 6, 7, 10 };
+		assertArrayEquals(expected, MyArrays.insertSorted(unmodifiedArray, 0));
+	}
 }

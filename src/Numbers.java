@@ -29,7 +29,7 @@ public class Numbers {
 		return flag;
 	}
 
-	static private int getSumOfDigits(int number) {
+	static public int getSumOfDigits(int number) {
 		int res = 0;
 		do {
 			res += number % 10;
