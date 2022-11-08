@@ -18,7 +18,6 @@ public class SportLotoApp {
 	}
 
 	public static int getRandomInt(int min, int max) {
-
 		return (int) (min + Math.random() * (max - min + 1));
 	}
 }
