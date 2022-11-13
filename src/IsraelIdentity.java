@@ -1,5 +1,7 @@
 
 public class IsraelIdentity {
+	public static final int N_DIGITS_ID = 9;
+
 	/**
 	 * 
 	 * @param id
@@ -11,8 +13,11 @@ public class IsraelIdentity {
 	 */
 	public static boolean verifyId(int id) {
 		boolean res = false;
-		if (Numbers.getNdigits(id) == 9) {
-			res = getSumOfIsraelId(id) % 10 == 0;
+		if (id > 0) {
+			int digits[] = Numbers.getDigits(id);
+			if (digits.length == N_DIGITS_ID) {
+				res = getControlSum(digits) % 10 == 0;
+			}
 		}
 		return res;
 	}
@@ -23,32 +28,52 @@ public class IsraelIdentity {
 	 *         than 9 iteration 0 can be but not the first number
 	 */
 	public static int generateRandomId() {
-		int res = 0;
-		for (int i = 0; i < 7; i++) {
-			if (i == 0) {
-				res = res * 10 + SportLotoApp.getRandomInt(1, 9);
-			}
-			res = res * 10 + SportLotoApp.getRandomInt(0, 9);
-		}
-		int sumOfDigits = getSumOfIsraelId(res);
-		int lastDigit = (100 - sumOfDigits) % 10;
+		int digits[] = new int[N_DIGITS_ID - 1];
+		fillRandomDigits(digits);
+		int controlSum = getControlSum(digits);
+		int lastDigit = getLastDigit(controlSum);
+		int res = Numbers.getNumberFromDigits(digits);
 		res = res * 10 + lastDigit;
 		return res;
 	}
 
-	private static int getSumOfIsraelId(int id) {
-		int arrayFromId[] = Numbers.getDigits(id);
+	private static int getLastDigit(int controlSum) {
+		int rem = controlSum%10;
 		int res = 0;
-		for (int i = 0; i < arrayFromId.length; i++) {
-			if (i % 2 != 0) {
-				int oddDigit = arrayFromId[i] * 2;
-				if (oddDigit > 9) {
-					oddDigit = Numbers.getSumOfDigits(oddDigit);
-				}
-				res += oddDigit;
-			} else {
-				res += arrayFromId[i];
+		if(rem != 0) {
+			res = 10-rem;
+		}
+		return res;
+	}
+
+	private static void fillRandomDigits(int[] digits) {
+		digits[0] = SportLotoApp.getRandomInt(1, 9);
+		for (int i = 1; i < digits.length; i++) {
+			digits[i] = SportLotoApp.getRandomInt(0, 9);
+		}
+	}
+
+	private static int getControlSum(int[] digits) {
+		return sumEvenIndexes(digits) + sumOddIndexes(digits);
+	}
+
+	private static int sumOddIndexes(int[] digits) {
+		int res = 0;
+		for (int i = 1; i < digits.length; i = i + 2) {
+			int oddDigit = digits[i] * 2;
+			if (oddDigit > 9) {
+				oddDigit -= 9;
 			}
+			res += oddDigit;
+		}
+		return res;
+
+	}
+
+	private static int sumEvenIndexes(int[] digits) {
+		int res = 0;
+		for (int i = 0; i < digits.length; i = i + 2) {
+			res += digits[i];
 		}
 		return res;
 	}
