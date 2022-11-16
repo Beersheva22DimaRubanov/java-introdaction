@@ -63,26 +63,6 @@ public class MyArrays {
 	 *         unsorted array O[logN] - search number in sorted (binary search)
 	 */
 	public static int binarySearch(int[] arraySorted, int number) {
-//		int left = 0;
-//		int right = arraySorted.length - 1;
-//		int middle = arraySorted.length / 2;
-//		int result = -1;
-//		boolean flag = false;
-//		while (left <= right) {
-//			if (number < arraySorted[middle]) {
-//				right = middle - 1;
-//			}
-//			if (number > arraySorted[middle]) {
-//				left = middle + 1;
-//			}
-//			if (number == arraySorted[middle]) {
-//				flag = true;
-//				result = middle;
-//				right = middle - 1;
-//			}
-//			middle = (left + right) / 2;
-//		}
-//		return !flag ? -(left + 1) : result;
 		int  left = 0;
 		int right = arraySorted.length - 1;
 		int middle = arraySorted.length / 2;
@@ -125,69 +105,6 @@ public class MyArrays {
 	}
 
 	public static boolean isOneSwapForSorted(int[] array) {
-//		int count = 0;
-//		boolean res = false;
-//		int firstIndex = -1;
-//		int secondIndex = 0;
-//		for (int i = 0; i < array.length - 1; i++) {
-//			if (array[i] > array[i + 1]) {
-//				count++;
-//				if (firstIndex < 0) {
-//					firstIndex = i;
-//				}
-//				if (count == 2) {
-//					secondIndex = i + 1;
-//				}
-//			}
-//		}
-//		if (count == 2) {
-//			int temp;
-//			temp = array[firstIndex];
-//			array[firstIndex] = array[secondIndex];
-//			array[secondIndex] = temp;
-//			if (firstIndex == 0 && secondIndex < array.length - 2) {
-//				if (array[firstIndex] < array[firstIndex + 1] && array[secondIndex] > array[secondIndex - 1]
-//						&& array[secondIndex] < array[secondIndex + 1]) {
-//					res = true;
-//				}
-//			} else if (firstIndex == 0 && secondIndex == array.length - 1) {
-//				if (array[firstIndex] < array[firstIndex + 1] && array[secondIndex] > array[secondIndex - 1]) {
-//					res = true;
-//				}
-//			} else if (firstIndex > 0 && secondIndex == array.length - 1) {
-//				if (array[firstIndex] < array[firstIndex + 1] && array[firstIndex] > array[firstIndex - 1]
-//						&& array[secondIndex] > array[secondIndex - 1]) {
-//					res = true;
-//				}
-//			} else if (firstIndex > 0 && secondIndex <= array.length - 2) {
-//				if (array[firstIndex] < array[firstIndex + 1] && array[firstIndex] > array[firstIndex - 1]
-//						&& array[secondIndex] > array[secondIndex - 1] && array[secondIndex] < array[secondIndex + 1]) {
-//					res = true;
-//				}
-//			}
-//		}
-//		if (count == 1) {
-//			int temp;
-//			temp = array[firstIndex];
-//			array[firstIndex] = array[firstIndex + 1];
-//			array[firstIndex + 1] = temp;
-//			if (firstIndex > 0 && firstIndex < array.length - 2) {
-//				if (array[firstIndex] > array[firstIndex - 1] && array[firstIndex + 1] < array[firstIndex + 2]) {
-//					res = true;
-//				}
-//			} else if (firstIndex == 0) {
-//				if (array[firstIndex + 1] < array[firstIndex + 2]) {
-//					res = true;
-//				}
-//			} else if (firstIndex == array.length - 2) {
-//				if (array[firstIndex] > array[firstIndex - 1]) {
-//					res = true;
-//				}
-//			}
-//		}
-//		return res;
-
-
 		int index1 = -1;
 		int index2 = -1;
 		int length = array.length - 1;
@@ -246,6 +163,21 @@ public class MyArrays {
 	 */
 	static public boolean isSum2(short array[], short sum) {
 		boolean res = false;
-		return false;
+		boolean [] arrayForCheck = new boolean[sum+1];
+		for (int i = 0; i<array.length; i++) {
+			if(array[i]<=sum) {
+				if(!arrayForCheck[array[i]]) {
+					arrayForCheck[array[i]] = true;
+				} else arrayForCheck[array[i]] = false;
+				if(!arrayForCheck[sum - array[i]]) {
+					arrayForCheck[sum-array[i]] = true;
+				}else arrayForCheck[sum-array[i]] = false;
+				if(!arrayForCheck[array[i]]) {
+					res = true;
+					break;
+				}
+			}
+		}
+		return res;
 	}
 }

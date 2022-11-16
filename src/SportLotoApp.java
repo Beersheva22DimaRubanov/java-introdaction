@@ -15,14 +15,6 @@ public class SportLotoApp {
 			numForCheck = BitOperations.setBitValue(numForCheck, number, true);
 			System.out.print(number + " ");
 		}
-
-		int[] array = { -1, 1, 3, 3, 3, 5, 13,  14, 88, 87 };
-//		MyArrays.bubleSort(array);
-		System.out.println("Is almost sorted: " + MyArrays.isOneSwapForSorted(array));
-		for (int i : array) {
-			System.out.print(i + ", ");
-		}
-		System.out.println("Search: " + MyArrays.binarySearch(array, 6));
 	}
 
 	public static int getRandomInt(int min, int max) {
