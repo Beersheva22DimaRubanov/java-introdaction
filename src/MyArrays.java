@@ -63,10 +63,10 @@ public class MyArrays {
 	 *         unsorted array O[logN] - search number in sorted (binary search)
 	 */
 	public static int binarySearch(int[] arraySorted, int number) {
-		int  left = 0;
+		int left = 0;
 		int right = arraySorted.length - 1;
 		int middle = arraySorted.length / 2;
-		while(left <= right && arraySorted[left] != number) {
+		while (left <= right && arraySorted[left] != number) {
 			if (number <= arraySorted[middle]) {
 				right = middle - 1;
 			} else {
@@ -74,25 +74,23 @@ public class MyArrays {
 			}
 			middle = (left + right) / 2;
 		}
-		return  left < arraySorted.length && arraySorted[left] == number ? left : -left - 1;
+		return left < arraySorted.length && arraySorted[left] == number ? left : -left - 1;
 	}
-	
-	
 
 	public static int[] bubleSort(int[] array) {
 		int unsortedLength = array.length;
 		do {
-			unsortedLength = moveGreaterRight(array, unsortedLength-1);
-		} while(unsortedLength != 0);
+			unsortedLength = moveGreaterRight(array, unsortedLength - 1);
+		} while (unsortedLength != 0);
 		return array;
 	}
 
 	private static int moveGreaterRight(int array[], int length) {
 		int res = 0;
-		for(int i =0; i<length; i++){
-			if (array[i] > array[i+1]) {
-				res = i+1;
-				swap(array, i, i+1);
+		for (int i = 0; i < length; i++) {
+			if (array[i] > array[i + 1]) {
+				res = i + 1;
+				swap(array, i, i + 1);
 			}
 		}
 		return res;
@@ -100,7 +98,7 @@ public class MyArrays {
 
 	private static void swap(int[] array, int i, int j) {
 		int tmp = array[i];
-		array[i] = array[i+1];
+		array[i] = array[i + 1];
 		array[j] = tmp;
 	}
 
@@ -135,7 +133,7 @@ public class MyArrays {
 		}
 		return index1 != -1 && res ? checkIndexes(array, index1, index2) : false;
 	}
-	
+
 	private static boolean checkIndexes(int[] array, int index1, int index2) {
 
 		return index2 == -1 ? checkOneIndex(array, index1) : checkTwoIndexes(array, index1, index2);
@@ -143,10 +141,9 @@ public class MyArrays {
 
 	private static boolean checkTwoIndexes(int[] array, int index1, int index2) {
 
-		return (index2 == array.length - 1 || array[index1] <= array[index2 + 1]) 
-				&& array[index2] <= array[index1 + 1]
+		return (index2 == array.length - 1 || array[index1] <= array[index2 + 1]) && array[index2] <= array[index1 + 1]
 				&& (index1 == 0 || array[index2] >= array[index1 - 1]);
-		
+
 	}
 
 	private static boolean checkOneIndex(int[] array, int index) {
@@ -157,24 +154,21 @@ public class MyArrays {
 
 	/**
 	 * 
-	 * @param array of short positive numbers                
+	 * @param array of short positive numbers
 	 * @param sum
 	 * @return true if array contains two numbers sum of which equals a given sum
 	 */
 	static public boolean isSum2(short array[], short sum) {
 		boolean res = false;
-		boolean [] arrayForCheck = new boolean[sum+1];
-		for (int i = 0; i<array.length; i++) {
-			if(array[i]<=sum) {
-				if(!arrayForCheck[array[i]]) {
-					arrayForCheck[array[i]] = true;
-				} else arrayForCheck[array[i]] = false;
-				if(!arrayForCheck[sum - array[i]]) {
-					arrayForCheck[sum-array[i]] = true;
-				}else arrayForCheck[sum-array[i]] = false;
-				if(!arrayForCheck[array[i]]) {
+		boolean[] arrayForCheck = new boolean[sum >= 0 ? sum + 1 : 0x7fff + 1];
+		int index = 0;
+		while (index < array.length && !res) {
+			short diff = (short) (sum - array[index]);
+			if(diff >= 0) {
+				if(arrayForCheck[diff]) {
 					res = true;
-					break;
+				} else {
+					arrayForCheck[array[index]] = true;
 				}
 			}
 		}

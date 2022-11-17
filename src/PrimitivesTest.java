@@ -173,7 +173,7 @@ class PrimitivesTest {
 		int ar2[] = { 1, 2, 4, 3, 5, 10 };
 		int ar3[] = { 1, 2, 3, 10, 5, 4 };
 		int ar4[] = { 1, 5, 3, 4, 2, 10 };
-		int ar5[] = { 1, 2, 3, 4, 10, 5 };
+		int ar5[] = { 1, 2, 3, 3, 3, 4, 10, 5 };
 		int ar6[] = { 2, 1, -3, 4, 5, 10 };
 		int ar7[] = { 3, 2, 1, 4, 5, 6 };
 		assertTrue(MyArrays.isOneSwapForSorted(ar1));
@@ -200,19 +200,19 @@ class PrimitivesTest {
 	@Test
 	void binirySearch() {
 		int ar1[] = { 1, 1, 2, 5, 10 };
-		int ar2[] = { 1, 2, 3,3,3,3,3,3,3,3, 4, 5, 10 };
-		int ar3[] = { 1, 2, 3, 4, 5, 6,10,10,10, 10 };
-		int ar4[] = { 1, 2, 3, 4, 5, 6,10,10, 10 };
+		int ar2[] = { 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5, 10 };
+		int ar3[] = { 1, 2, 3, 4, 5, 6, 10, 10, 10, 10 };
+		int ar4[] = { 1, 2, 3, 4, 5, 6, 10, 10, 10 };
 		assertEquals(0, MyArrays.binarySearch(ar1, 1));
 		assertEquals(2, MyArrays.binarySearch(ar2, 3));
 		assertEquals(6, MyArrays.binarySearch(ar3, 10));
 		assertEquals(-10, MyArrays.binarySearch(ar4, 12));
 	}
-	
+
 	@Test
 	void isSumEqualSum() {
-		short arr [] = {0, 1, 27, 3, 32, 5, 14, 4,8,6,7};
-		short sum = 27;
+		short arr[] = { 0, 1, 27, 3, 32, 5, 14, 4, 8, 6, 7 };
+		short sum = 2;
 		assertTrue(MyArrays.isSum2(arr, sum));
 	}
 }
