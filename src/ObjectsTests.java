@@ -23,5 +23,14 @@ public class ObjectsTests {
 		char[] helloAr = hello.toCharArray();
 		assertEquals('h', helloAr[0]);
 		System.out.println((byte) helloAr[2]);
+
+	}
+	
+	@Test
+	void isAnagramTest(){
+		assertTrue(Strings.isAnagram("hello world", "world hello"));
+		assertFalse(Strings.isAnagram("hello world", "world"));
+		assertTrue(Strings.isAnagram(" ", " "));
+		assertTrue(Strings.isAnagram("thing", "night"));
 	}
 }
