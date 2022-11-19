@@ -34,17 +34,16 @@ public class Strings {
 			Integer num = Integer.parseInt(array[i]);
 			helper[num + 128] += 1;
 		}
-		int n = 0;
-		for (Integer i = 0; i < helper.length; i++) {
+		int i = 0;
+		int j = 0;
+		while (i < helper.length) {
 			if (helper[i] != 0) {
-				while(helper[i] != 0) {
-					Integer num = i - 128;
-					array[n] = num.toString();
-					n++;
-					helper[i] --;
-				}
-				
-			}
+				Integer num = i - 128;
+				array[j] = num.toString();
+				j++;
+				helper[i]--;
+			} else
+				i++;
 		}
 	}
 }
