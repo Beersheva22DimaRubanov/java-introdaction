@@ -2,6 +2,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import telran.Strings;
+
 public class ObjectsTests {
 
 	@Test
@@ -65,24 +67,5 @@ public class ObjectsTests {
 		assertFalse("$ _".matches(Strings.javaNameExp()));
 	}
 	
-	@Test
-	void ipV40ctetTest() {
-		assertTrue("123".matches(Strings.ipV40ctet()));
-		assertTrue("0".matches(Strings.ipV40ctet()));
-		assertTrue("255".matches(Strings.ipV40ctet()));
-		assertFalse("256".matches(Strings.ipV40ctet()));
-		assertTrue("089".matches(Strings.ipV40ctet()));
-		assertTrue("009".matches(Strings.ipV40ctet()));
-	}
 	
-	@Test
-	void ipV4Test() {
-//		assertTrue("089.045.120.230".matches(Strings.ipV4()));
-		assertTrue("0.0.0.0".matches(Strings.ipV4()));
-		assertTrue("123.245.213.224".matches(Strings.ipV4()));
-		assertTrue("255.255.255.255".matches(Strings.ipV4()));
-		assertFalse("123.345.1234.123".matches(Strings.ipV4()));
-		assertFalse("123.".matches(Strings.ipV4()));
-		assertFalse("_/".matches(Strings.ipV4()));
-	}
 }
