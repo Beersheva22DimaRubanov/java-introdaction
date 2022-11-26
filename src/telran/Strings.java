@@ -89,15 +89,11 @@ public class Strings {
 	private static String arithmeticExpression() {
 		String operatorExp = operator();
 		String operandExp = operand();
-		// FIXME
-		// adds checking right placing the braces
-		return String.format("%1$s(%2$s%1$s)*", operandExp, operatorExp);
+		return String.format("\\(*%1$s\\)*(%2$s\\(*%1$s\\)*)*", operandExp, operatorExp);
 	}
 
 	private static String operand() {
-		// FIXME
-		// adds possibility of using Java variables
-		return "(\\d+\\.?\\d*|\\.\\d+)";
+		return "(\\d+\\.?\\d*|\\.\\d+|[a-z])";
 	}
 
 	private static String operator() {
@@ -124,7 +120,7 @@ public class Strings {
 			String operators[] = expression.split(operand());
 			res = getOperandValue(operands[0], values, names);
 			int index = 1;
-			while (index < operands.length && res.isNaN()) {
+			while (index < operands.length && !res.isNaN()) {
 				double operandValue = getOperandValue(operands[index], values, names);
 				res = computeOperation(res, operandValue, operators[index]);
 				index++;
@@ -157,12 +153,31 @@ public class Strings {
 	}
 
 	private static Double getOperandValue(String operand, double[] values, String[] names) {
-		// FIXME for possible variable names
-		return Double.parseDouble(operand);
+		double res = Double.NaN;
+		if (names != null && operand.matches("[a-z]")) {
+			int i = 0;
+			while (i < names.length && !operand.equals(names[i])) {
+				i++;
+			}
+			if (i < names.length) {
+				res = values[i];
+			} else
+				res = Double.NaN;
+		} else
+			res = Double.parseDouble(operand);
+		return res;
 	}
 
 	private static boolean checkBraces(String expression) {
-		// TODO Auto-generated method stub
-		return true;
+		int count = 0;
+		char[] array = expression.toCharArray();
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == '(') {
+				count++;
+			} else if (array[i] == ')') {
+				count--;
+			}
+		}
+		return count == 0;
 	}
 }
