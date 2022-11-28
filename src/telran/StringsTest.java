@@ -38,8 +38,8 @@ public class StringsTest {
 	void computeExpressionTest() {
 		assertEquals(10.5, Strings.computeArithmeticExpression("2 + 2 + 1 *2 + 0.5", null, null));
 		assertTrue(Double.isNaN(Strings.computeArithmeticExpression("2 # 2 ++ 10", null, null)));
-		assertEquals(10.5, Strings.computeArithmeticExpression("a + 2 +c *2 + 0.5", new double[] { 2, 1 },
-				new String[] { "a", "c" }));
+		assertEquals(10.5, Strings.computeArithmeticExpression("a + 2 +c *2 + 0.5", new double[] { 2, 3, 1, 4 },
+				new String[] { "a", "b", "c", "d" }));
 		assertEquals(10.5, Strings.computeArithmeticExpression("(2 + 2) + 1 *2 + 0.5", null, null));
 		assertEquals(10.5, Strings.computeArithmeticExpression("((2 + 2 + 1 *2 + 0.5))", null, null));
 		assertEquals(10.5, Strings.computeArithmeticExpression("(2) + (2) + (1) *(2) + (0.5)", null, null));

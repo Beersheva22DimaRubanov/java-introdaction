@@ -89,7 +89,7 @@ public class Strings {
 	private static String arithmeticExpression() {
 		String operatorExp = operator();
 		String operandExp = operand();
-		return String.format("\\(*%1$s\\)*(%2$s\\(*%1$s\\)*)*", operandExp, operatorExp);
+		return String.format("^\\(*%1$s\\)*(%2$s\\(*%1$s\\)*)*$", operandExp, operatorExp);
 	}
 
 	private static String operand() {
@@ -155,12 +155,19 @@ public class Strings {
 	private static Double getOperandValue(String operand, double[] values, String[] names) {
 		double res = Double.NaN;
 		if (names != null && operand.matches("[a-z]")) {
-			int i = 0;
-			while (i < names.length && !operand.equals(names[i])) {
-				i++;
+			int left = 0;
+			int right = names.length - 1;
+			int midle = names.length / 2;
+			while (left <= right && !operand.equals(names[left])) {
+				if (operand.compareTo(names[midle]) <= 0) {
+					right = midle - 1;
+				} else {
+					left = midle + 1;
+				}
+				midle = left+right/2;
 			}
-			if (i < names.length) {
-				res = values[i];
+			if (left<names.length && names[left].equals(operand)) {
+				res = values[left];
 			} else
 				res = Double.NaN;
 		} else
