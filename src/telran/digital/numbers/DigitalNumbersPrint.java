@@ -163,6 +163,7 @@ public class DigitalNumbersPrint {
 	public static String[] eight(int offset, int width, int height) {
 		return threeLinesDigitsConstructor(offset, width, height, 8);
 	}
+	
 
 	public static String[] nine(int offset, int width, int height) {
 		return threeLinesDigitsConstructor(offset, width, height, 9);
@@ -176,11 +177,11 @@ public class DigitalNumbersPrint {
 			String[] firstLine = twoVerticalLines(offset, width, (height - THREE_LINES_FIGURE) / 2);
 			updateArray(firstLine, 0, res, 1, firstLine.length);
 			length = firstLine.length;
-		} else if (digit == 2 || digit == 3 || digit == 6) {
+		} else if (digit == 2 || digit == 3 ) {
 			String[] firstLine = rightVerticalLine(offset + width - 1, (height - THREE_LINES_FIGURE) / 2);
 			updateArray(firstLine, 0, res, 1, firstLine.length);
 			length = firstLine.length;
-		} else if(digit == 5) {
+		} else if(digit == 5|| digit == 6) {
 			String[] firstLine = lefttVerticalLine(offset, (height - THREE_LINES_FIGURE) / 2, width);
 			updateArray(firstLine, 0, res, 1, firstLine.length);
 			length = firstLine.length;
